@@ -1,0 +1,19 @@
+			<%= ajax_will_paginate @products %>
+<table class ="table">
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Posted by</th>
+					<th>Actions</th>
+				</tr>
+				<%@products.each do |p|%>
+					<tr>
+						<td><div style ="float:left;margin-right:10px;"><%= image_tag p.image_url.to_s, :size => "50x50" %></div><%=link_to p.name, p%></td>
+						<td>Php <%=p.price%></td>
+						<%user = User.find(p.user_id)%>
+						<td><%=link_to user.email, user%></td>
+						<td><%=link_to "Delete", p, method: :delete,  data: { confirm: 'Are you sure?' }%></td>
+					</tr>
+				<%end%>
+			</table>
+			<%= ajax_will_paginate @products %>

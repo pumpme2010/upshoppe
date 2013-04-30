@@ -1,0 +1,15 @@
+<% javascript_include_tag  "pagination" %>	
+	<div class="container-fluid">
+      <div class="row-fluid">
+		<%= render :partial => "shared/sidebar" %>
+
+		<div class = "span9">
+			<% flash.each do |name, msg| %>
+		    	<%= content_tag :div, msg, :id => "flash#{name}", :class => "alert" %>
+		    <% end %>
+		<div id = "users">
+				<%= render "users" %>
+			</div>
+</div>
+</div>
+</div>

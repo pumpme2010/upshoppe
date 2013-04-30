@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+  	<%if current_user%>
+	<%= render :partial => "shared/sidebar" %>
+	<%end%>
+		
+		<%if current_user%>
+		<p class ="alert">
+			<%if current_user.contact_number.nil?%>
+				Please update contact number.&nbsp;&nbsp;&nbsp;
+			<%end%>
+			<%if current_user.address.nil?%>
+				Please update address.&nbsp;&nbsp;&nbsp;
+			<%end%>
+			<%if current_user.description.nil?%>
+				Please update description.&nbsp;&nbsp;&nbsp;
+			<%end%>
+		</p>
+		<%end%>
+		
+		<div class ="span3">
+			<table class = "table">
+			<tr><th>Recent Activities</th></tr>
+			<tr>
+				<%@comments.each do |c|%>
+				<tr><td>
+					<%user = User.find(c.user_id)%>
+					<div style ="float:left;margin-right:10px;"><%= image_tag user.image_url.to_s, :size => "50x50" %></div><%=link_to user.shopname, user%> said 
+					"<%=c.body%>" on
+					<%product = Product.find(c.product_id)%>
+					<%=link_to product.name, product%>
+				</td></tr>
+				<%end%>
+			</tr>
+			</table>
+		</div>
+		<div class ="span3">
+			<table class = "table">
+			<tr><th>New Products</th></tr>
+				<%@products.each do |p|%>
+				<tr><td>
+					<div style ="float:left;margin-right:10px;"><%= image_tag p.image_url.to_s, :size => "50x50" %></div><%=link_to p.name, p%> was posted
+					<%=time_ago_in_words(p.created_at)%> ago
+					&nbsp;#<%=link_to p.tag, pages_tag_path(:tagname => p.tag)%>
+				</td></tr>
+				<%end%>
+			
+			</table>
+		</div>
+		<div class ="span3">
+			<table class = "table">
+			<tr><th>Most Popular</th></tr>
+			<tr>
+				<%@popular.each do |p|%>
+				<tr><td>
+					<%product = Product.find(p.product_id)%>
+					
+					<div style ="float:left;margin-right:10px;"><%= image_tag product.image_url.to_s, :size => "50x50" %></div><%=link_to p.name, product%> has 
+					
+					<%=p.num%> likes
+					&nbsp;#<%=link_to product.tag, pages_tag_path(:tagname => product.tag)%>
+				</td></tr>
+				<%end%>
+			</tr>
+			</table>
+		</div>
+
+	</div>
+  </div>
+
+

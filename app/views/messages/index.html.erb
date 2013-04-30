@@ -1,0 +1,27 @@
+<% javascript_include_tag  "pagination" %>
+
+
+<% if current_user %>
+
+	<div class="container-fluid">
+      <div class="row-fluid">
+		<%= render :partial => "shared/sidebar" %>
+
+		<div class ="span9">
+			<p class="alert">You have <%=@nummsg%> message/s today.</p>
+			<h3>Inbox</h3>
+
+			<% flash.each do |name, msg| %>
+		    	<%= content_tag :div, msg, :id => "flash#{name}", :class => "alert" %>
+		    <% end %>
+
+			<div id = "inbox">
+				<%= render "inbox" %>
+			</div>
+
+		</div>
+	  </div>
+    </div>
+<% else %>
+	<%= render :template => "sessions/new" %>
+<% end %>

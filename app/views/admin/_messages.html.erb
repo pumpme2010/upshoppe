@@ -1,0 +1,21 @@
+			<%= ajax_will_paginate @messages %>	
+<table class ="table">
+				<tr>
+					<th>Message</th>
+					<th>Sent to</th>
+					<th>From</th>
+					<th>Actions</th>
+				</tr>
+				<%@messages.each do |m|%>
+					<tr>
+						<td><%=m.content%></td>
+						<%sent = User.find(m.sendto_id)%>
+						<td><div style ="float:left;margin-right:10px;"><%= image_tag sent.image_url.to_s, :size => "50x50" %></div><%=link_to sent.email, sent%></td>
+						<%from = User.find(m.sender_id)%>
+						<td><div style ="float:left;margin-right:10px;"><%= image_tag from.image_url.to_s, :size => "50x50" %></div><%=link_to from.email, from%></td>
+						<td><%= link_to 'delete', user_message_path(m.sender_id, m.id), :method => :delete, :data => { confirm: 'Are you sure?' } %></td>
+					</tr>
+				<%end%>
+			</table>
+
+			<%= ajax_will_paginate @messages %>	

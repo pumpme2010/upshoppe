@@ -1,0 +1,25 @@
+<% if current_user %>
+
+	<div class="container-fluid">
+      <div class="row-fluid">
+		<%= render :partial => "shared/sidebar" %>
+
+		<div class ="span9">
+			<h3>My Products</h3>
+
+			<% flash.each do |name, msg| %>
+		    	<%= content_tag :div, msg, :id => "flash#{name}", :class => "alert" %>
+		    <% end %>
+			<%= link_to 'Add new',new_product_path,  :class =>"btn btn-small btn-primary" , :style =>"margin-bottom:20px"%>
+
+
+			<div id = "pradaks2">
+				<%= render "pradaks2" %>
+			</div>
+
+		</div>
+	  </div>
+    </div>
+<% else %>
+	<%= render :template => "sessions/new" %>
+<% end %>

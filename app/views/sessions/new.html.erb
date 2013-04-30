@@ -1,0 +1,48 @@
+<div class="container">
+	<% if current_user %>
+		
+	<% else %>
+		<%= form_tag sessions_path, :class => "form-signin pull-right", :style => "margin-top:50px" do %>
+			<% flash.each do |name, msg| %>
+		    	<%= content_tag :div, msg, :id => "flash#{name}", :class => "alert" %>
+		    <% end %>
+
+			<h2 class="form-signin-heading">Log-in</h2>
+				
+			<%= text_field_tag :email, params[:email] , :class =>"input-block-level", :placeholder =>"Email address" %>
+
+			<%= password_field_tag :password, params[:password] , :class =>"input-block-level", :placeholder =>"Password" %>
+
+			<%= submit_tag "Log-in",  :class =>"btn btn-large btn-primary"%>
+		<% end %>               
+	<% end %>
+
+		<div class ="span3">
+			<table class = "table">
+			<tr><th>New Products</th></tr>
+				<%@products.each do |p|%>
+				<tr><td>
+					<div style ="float:left;margin-right:10px;"><%= image_tag p.image_url.to_s, :size => "50x50" %></div><%=link_to p.name, p%> was posted
+					<%=time_ago_in_words(p.created_at)%> ago
+				</td></tr>
+				<%end%>
+			
+			</table>
+		</div>
+		<div class ="span3">
+			<table class = "table">
+			<tr><th>Most Popular</th></tr>
+			<tr>
+				<%@popular.each do |p|%>
+				<tr><td>
+					<%product = Product.find(p.product_id)%>
+					
+					<div style ="float:left;margin-right:10px;"><%= image_tag product.image_url.to_s, :size => "50x50" %></div><%=link_to p.name, product%> has 
+					
+					<%=p.num%> likes
+				</td></tr>
+				<%end%>
+			</tr>
+			</table>
+		</div>
+	</div>

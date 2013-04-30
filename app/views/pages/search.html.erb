@@ -1,0 +1,66 @@
+	<div class="container-fluid">
+      <div class="row-fluid">
+		<%= render :partial => "shared/sidebar" %>
+
+		<div class = "span9">
+			<h3>Shop List</h3>
+			<table class ="table">
+			<tr>
+				<th>Shop Name</th>
+				<th>Contact number</th>
+				<th>Description</th>
+				<th>Address</th>
+			</tr>
+			<% @users.each do |t| %>
+				<tr>
+					<td><div style ="float:left;margin-right:10px;"><%= image_tag t.image_url.to_s, :size => "50x50" %></div><%=link_to t.shopname, t%></td>
+					<td><%=t.contact_number%></td>
+					<td><%=t.description%></td>
+					<td><%=t.address%></td>
+				</tr>
+			<% end %>
+			</table>
+			<hr>
+			<h3>Product List</h3>
+			<table class ="table">
+			<tr>
+				<th>Product</th>
+				<th>Price</th>
+				<th>Quality</th>
+				<th>Description</th>
+			</tr>
+			<% @products.each do |product| %>
+			<tr>
+			    <td><div style ="float:left;margin-right:10px;"><%= image_tag product.image_url.to_s, :size => "50x50" %></div><%= link_to product.name, product %></td>
+			    <td><%= number_to_currency(product.price, :unit => "Php") %></td>
+			    <td><%= product.quality %></td>
+			    <td><%= product.description %></td>
+			 </tr>			  
+			 <% end %>
+			</table>
+			<hr>
+
+			<h3>Tags</h3>
+			<table class ="table">
+			<tr>
+				<th>Tag</th>
+				<th>Product</th>
+			</tr>
+			<%temp =""%>
+			<% @tags.each do |t| %>
+			<tr>
+				<%if temp == t.tag%>
+					<td></td>
+				<%else%>
+					<td><%=link_to t.tag, pages_tag_path(:tagname => t.tag)%></td>
+					<%temp = t.tag%>
+				<%end%>
+				<td><div style ="float:left;margin-right:10px;"><%= image_tag t.image_url.to_s, :size => "50x50" %></div><%=link_to t.name, t%></td>
+			 </tr>			  
+			 <% end %>
+
+
+			</table>
+		</div>
+	</div>
+</div>

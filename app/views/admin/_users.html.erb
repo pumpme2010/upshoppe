@@ -1,0 +1,28 @@
+		<%= ajax_will_paginate @users %>
+<table class ="table">
+				<tr>
+					<th>Email</th>
+					<th>Contact Number</th>
+					<th>Address</th>
+					<th>Actions</th>
+				</tr>
+				<%@users.each do |u|%>
+					<tr>
+						<td><%if u.image.nil?%>
+								<div style ="float:left;margin-right:10px;"><%= image_tag ("user.jpg"), :size => "50x50" %></div>
+							<%else%>
+								<div style ="float:left;margin-right:10px;"><%= image_tag u.image_url.to_s, :size => "50x50" %></div>
+							<%end%>
+							<%=link_to u.email, u%></td>
+						<td><%=u.contact_number%></td>
+						<td><%=u.address%></td>
+						<%if u.admin%>
+							<td>Administrator</td>
+						<%else%>
+							<td><%=link_to "Delete", u, method: :delete,  data: { confirm: 'Are you sure?' }%> | <%=link_to "Promote", admin_promote_path(:id =>u.id), data: {confirm: 'Are you sure?'}%></td>
+						<%end%>
+					</tr>
+				<%end%>
+			</table>
+
+		<%= ajax_will_paginate @users %>

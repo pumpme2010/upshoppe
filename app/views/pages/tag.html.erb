@@ -1,0 +1,28 @@
+	<div class="container-fluid">
+      <div class="row-fluid">
+		<%= render :partial => "shared/sidebar" %>
+
+		<div class = "span9">
+			<table class ="table">
+			<tr>
+				<th>Tag</th>
+				<th>Product</th>
+			</tr>
+			<%temp =""%>
+			<% @tags.each do |t| %>
+			<tr>
+				<%if temp == t.tag%>
+					<td></td>
+				<%else%>
+					<td><%=link_to t.tag, pages_tag_path(:tagname => t.tag)%></td>
+					<%temp = t.tag%>
+				<%end%>
+				<td><%= image_tag t.image_url.to_s, :size => "20x20" %>&nbsp;<%=link_to t.name, t%></td>
+			 </tr>			  
+			 <% end %>
+
+
+			</table>
+		</div>
+	</div>
+</div>

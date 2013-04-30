@@ -1,0 +1,20 @@
+		<%= ajax_will_paginate @users %>
+<table class ="table">
+		<tr>
+			<th>Shop Name</th>
+			<th>Contact number</th>
+			<th>Description</th>
+			<th>Address</th>
+		</tr>
+		<% @users.each do |t| %>
+			<tr>
+				<td><%= image_tag t.image_url.to_s, :size => "50x50" %>&nbsp;<%=link_to t.shopname, t%></td>
+				<td><%=t.contact_number%></td>
+				<td><%=t.description%></td>
+				<td><%=t.address%></td>
+			</tr>
+	
+		<% end %>
+		</table>
+
+		<%= ajax_will_paginate @users %>

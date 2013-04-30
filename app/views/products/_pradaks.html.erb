@@ -1,0 +1,22 @@
+<%= ajax_will_paginate @products %>
+<table class ="table">
+			<tr>
+				<th>Product</th>
+				<th>Price</th>
+				<th>Quality</th>
+				<th>Description</th>
+			</tr>
+
+			<% @products.each do |product| %>
+			<tr>
+			    <td><%= image_tag product.image_url.to_s, :size => "50x50" %>&nbsp;<%= link_to product.name, product %></td>
+			    <td><%= number_to_currency(product.price, :unit => "Php") %></td>
+			    <td><%= product.quality %></td>
+			    <td><%= product.description %></td>
+			 </tr>			  
+			 <% end %>
+
+
+
+			</table>
+			<%= ajax_will_paginate @products %>

@@ -1,0 +1,26 @@
+			<%= ajax_will_paginate @messages %>
+<table class ="table table-striped table-bordered table-condensed">
+			<tr>
+				<th>To</th>
+				<th>Message</th>
+				<th>Sent Time</th>
+			</tr>
+			<% temp = 0 %>
+			<% @messages.each do |m| %>
+			<tr>
+				<td>
+				<% user = User.find(m.sendto_id)%>
+				<% if  user.id != temp%>
+					<%= image_tag user.image_url.to_s, :size => "20x20" %>&nbsp;<%= link_to user.shopname, user %>
+			        <% temp = user.id %>		
+				<% end %>
+			    </td>
+			    <td><%= m.content %></td>
+			    <td><%= time_ago_in_words(m.created_at) %> ago</td>
+
+			 </tr>			  
+			 <% end %>
+
+
+			</table>
+			<%= ajax_will_paginate @messages %>
