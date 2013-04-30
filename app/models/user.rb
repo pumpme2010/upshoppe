@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   #validate regex for mail
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates :password, :length => {:minimum => 5}, :on => :create
-  validates_numericality_of :contact_number
+  validates_numericality_of :contact_number, :on => :update
 
   def encrypt_password
   	if password.present?
