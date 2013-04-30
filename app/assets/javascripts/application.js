@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 $(function() {
 	$("pradaks th a").live("click", function() {
 		$.getScript(this.href);

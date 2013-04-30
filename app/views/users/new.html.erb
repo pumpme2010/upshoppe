@@ -41,14 +41,17 @@
 			<table class = "table">
 			<tr><th>Most Popular</th></tr>
 			<tr>
-				<%@popular.each do |p|%>
+				<%Product.all.each do |p|
+					@likes = Like.where(:product_id => p.id).count
+				
+					unless @likes === 0
+				%>
 				<tr><td>
-					<%product = Product.find(p.product_id)%>
 					
-					<div style ="float:left;margin-right:10px;"><%= image_tag product.image_url.to_s, :size => "50x50" %></div><%=link_to p.name, product%> has 
+					<div style ="float:left;margin-right:10px;"><%= image_tag p.image_url.to_s, :size => "50x50" %></div><%=link_to p.name, p%> has <%=@likes%> likes
 					
-					<%=p.num%> likes
 				</td></tr>
+				<%end%>
 				<%end%>
 			</tr>
 			</table>

@@ -3,7 +3,6 @@ class AdminController < ApplicationController
 		#provides data for admin newsfeed without limi
   		@products = Product.order("created_at DESC")
   		@comments = Comment.order("created_at DESC")
-   		@popular = Like.find_by_sql("SELECT product_id, count(product_id) as num, name FROM likes LEFT JOIN products ON products.id = likes.product_id GROUP BY product_id ORDER BY num DESC")	
 	end
 
 	def products
